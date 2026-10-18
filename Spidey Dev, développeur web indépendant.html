@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Spidey Dev, développeur web indépendant</title>
+<meta name="description" content="Spidey Dev crée des sites et des applications web. Première application en cours de développement.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#EDF0F8;--ink:#171B45;--soft:#4F5582;--line:#C5CCE4;--red:#E0262F;--on-red:#fff;--blue:#2B4FE6;
+--display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;--body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#141838;--ink:#EDF0F8;--soft:#A9B0D8;--line:#2F3668;--red:#FF4650;--on-red:#141838;--blue:#8CA2FF}}
+:root[data-theme="dark"]{--paper:#141838;--ink:#EDF0F8;--soft:#A9B0D8;--line:#2F3668;--red:#FF4650;--on-red:#141838;--blue:#8CA2FF}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--body);-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+.wrap{width:100%;max-width:1280px;margin-inline:auto;padding-inline:clamp(20px,5vw,72px)}
+h1,h2,h3{font-family:var(--display);font-optical-sizing:auto;margin:0}
+
+.hero{position:relative;overflow:hidden;min-height:max(580px,92svh);display:flex;flex-direction:column;justify-content:space-between}
+.hero>canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero>:not(canvas){position:relative;z-index:1}
+.bar{display:flex;align-items:center;justify-content:space-between;padding-block:22px}
+.mark{font:700 1.15rem var(--display);text-decoration:none;display:flex;align-items:center;gap:10px}
+.mark i{width:12px;height:12px;border-radius:50%;background:var(--red)}
+.nav{display:flex;gap:26px;font-size:.95rem}
+.nav a{text-decoration:none;color:var(--soft)}
+.nav a:hover{color:var(--ink)}
+.hero-in{padding-bottom:clamp(36px,7vw,80px)}
+h1{font-weight:800;font-size:clamp(4.2rem,16vw,12rem);line-height:.86;letter-spacing:-.045em}
+.lead{max-width:30ch;margin:clamp(20px,3vw,34px) 0 0;font:500 clamp(1.25rem,2.6vw,1.75rem)/1.3 var(--display);letter-spacing:-.01em}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 0}
+.btn{display:inline-flex;align-items:center;padding:14px 24px;border-radius:999px;font-weight:600;text-decoration:none;border:2px solid var(--ink);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.red{background:var(--red);border-color:var(--red);color:var(--on-red)}
+.status{display:flex;align-items:center;gap:10px;margin:26px 0 0;font-size:.95rem;color:var(--soft)}
+.status i{width:9px;height:9px;border-radius:50%;background:var(--red);flex:none}
+
+section.s{padding-block:clamp(64px,10vw,140px)}
+h2{font-weight:700;font-size:clamp(2.1rem,5.5vw,4rem);line-height:1;letter-spacing:-.035em;max-width:16ch}
+.intro{max-width:52ch;color:var(--soft);margin:20px 0 0}
+.rows{margin-top:clamp(32px,5vw,60px)}
+.row{display:grid;grid-template-columns:1fr 1.3fr;gap:12px 40px;padding-block:30px;border-top:1px solid var(--line)}
+.row:last-child{border-bottom:1px solid var(--line)}
+h3{font-weight:700;font-size:clamp(1.4rem,2.6vw,2rem);line-height:1.1;letter-spacing:-.02em}
+.row p,.proj p{margin:0;color:var(--soft);max-width:52ch}
+.tools{margin:28px 0 0;max-width:62ch}
+
+.proj{display:grid;grid-template-columns:1.1fr 1.3fr 1.1fr;gap:16px 40px;align-items:start;padding-block:30px;border-top:1px solid var(--line)}
+.proj:last-of-type{border-bottom:1px solid var(--line)}
+.steps{list-style:none;display:flex;margin:0;padding:0}
+.steps li{flex:1;position:relative;padding-top:24px;font-size:.8rem;color:var(--soft)}
+.steps li::before{content:"";position:absolute;top:0;left:0;width:14px;height:14px;border-radius:50%;border:2px solid var(--line);background:var(--paper);z-index:1}
+.steps li::after{content:"";position:absolute;top:6px;left:14px;right:0;height:2px;background:var(--line)}
+.steps li:last-child::after{display:none}
+.steps li.on::before{background:var(--blue);border-color:var(--blue)}
+.steps li.on::after{background:var(--blue)}
+.steps li[aria-current]{color:var(--ink);font-weight:600}
+.steps li[aria-current]::before{background:var(--red);border-color:var(--red);box-shadow:0 0 0 4px color-mix(in srgb,var(--red) 25%,transparent)}
+.steps li[aria-current]::after{background:var(--line)}
+
+.contact{border-top:1px solid var(--line)}
+.contact .cta{margin-top:32px}
+footer{padding-block:28px 40px;color:var(--soft);font-size:.9rem}
+
+@media (max-width:760px){
+.row,.proj{grid-template-columns:1fr}
+.nav a:not(.keep){display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<section class="hero" id="top">
+<canvas id="web" aria-hidden="true"></canvas>
+<header class="bar wrap">
+<a class="mark" href="#top"><i></i>Spidey Dev</a>
+<nav class="nav" aria-label="Navigation">
+<a href="#services">Ce que je fais</a>
+<a href="#dev">Keeply</a>
+<a class="keep" href="#contact">Contact</a>
+</nav>
+</header>
+<div class="hero-in wrap">
+<h1>Spidey<br>Dev</h1>
+<p class="lead">Je crée des sites et des applications web, de l’idée jusqu’au lien que l’on partage.</p>
+<p class="cta">
+<a class="btn red" href="#dev">Voir ce que je construis</a>
+<a class="btn" href="#contact">Me contacter</a>
+</p>
+<p class="status"><i></i>Développeur indépendant, première application en cours de développement</p>
+</div>
+</section>
+
+<main>
+<section class="s" id="services">
+<div class="wrap">
+<h2>Ce que je sais faire</h2>
+<p class="intro">Je commence à construire mes propres projets, avec une idée fixe : que ce soit propre, rapide et facile à garder en vie.</p>
+<div class="rows">
+<div class="row"><h3>Sites vitrines et communautaires</h3><p>Des pages claires, légères, qui s’affichent bien partout, du téléphone à l’écran large.</p></div>
+<div class="row"><h3>Applications web</h3><p>Des outils qui font un vrai travail : données à jour, espaces réservés, panneaux d’administration.</p></div>
+<div class="row"><h3>Une base sans serveur à gérer</h3><p>Du HTML, du CSS et du JavaScript côté écran, des données en JSON sur GitHub, et des fonctions sans serveur pour la partie sécurisée. Gratuit à héberger, simple à maintenir.</p></div>
+</div>
+<p class="tools">Mes outils : HTML, CSS, JavaScript, fonctions sans serveur, API GitHub, données JSON.</p>
+</div>
+</section>
+
+<section class="s" id="dev">
+<div class="wrap">
+<h2>En construction</h2>
+<p class="intro">Je n’ai pas encore de gros projet à vous montrer. Voici celui qui se construit en ce moment, et où il en est.</p>
+<div class="rows">
+<article class="proj">
+<h3>Keeply</h3>
+<p>Une application d’organisation personnelle imaginée pour rassembler ses éléments du quotidien dans une expérience simple et soignée.</p>
+<ol class="steps" aria-label="Avancement : code en cours">
+<li class="on">Idée</li><li class="on">Maquette</li><li class="on" aria-current="step">Code</li><li>Test</li>
+</ol>
+</article>
+</div>
+</div>
+</section>
+
+<section class="s contact" id="contact">
+<div class="wrap">
+<h2>Un projet en tête ? Parlons-en.</h2>
+<p class="intro">Un site, une application, une idée à tester : écrivez-moi, je réponds.</p>
+<p class="cta" id="links">
+<a class="btn red" data-k="email" hidden>M’écrire un e-mail</a>
+<a class="btn" data-k="github" hidden>Voir mon GitHub</a>
+<a class="btn" data-k="discord" hidden>Me rejoindre sur Discord</a>
+</p>
+<p class="intro" id="nolink" hidden>Les moyens de contact arrivent bientôt.</p>
+</div>
+</section>
+</main>
+
+<footer class="wrap">© 2026 Spidey Dev. Fait main, sans serveur.</footer>
+
+<script>
+/* Remplis tes liens ici : e-mail (ex. "toi@exemple.fr"), GitHub et Discord (adresses complètes). Laisse "" pour masquer un bouton. */
+const CONFIG={email:"",github:"",discord:""};
+
+(function(){
+  var any=false;
+  document.querySelectorAll("#links [data-k]").forEach(function(a){
+    var v=(CONFIG[a.dataset.k]||"").trim();
+    if(!v)return;
+    a.href=a.dataset.k==="email"?"mailto:"+v:v;
+    if(a.dataset.k!=="email"){a.target="_blank";a.rel="noopener"}
+    a.hidden=false;any=true;
+  });
+  if(!any){document.getElementById("links").hidden=true;document.getElementById("nolink").hidden=false}
+})();
+
+(function(){
+  var cv=document.getElementById("web"),ctx=cv.getContext("2d"),hero=cv.parentElement;
+  var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var N=16,K=9,w,h,cx,cy,R,P=[],mx=-1e4,my=-1e4,t0=performance.now(),vis=true,raf=0;
+  function size(){
+    var d=Math.min(devicePixelRatio||1,2);w=hero.clientWidth;h=hero.clientHeight;
+    cv.width=w*d;cv.height=h*d;ctx.setTransform(d,0,0,d,0,0);
+    var wide=w>760;cx=wide?w*.7:w*.64;cy=wide?h*.46:h*.34;
+    R=Math.hypot(Math.max(cx,w-cx),Math.max(cy,h-cy))*.98;P=[];
+    for(var k=1;k<=K;k++){var r=R*Math.pow(k/K,1.18),row=[];
+      for(var i=0;i<N;i++){var a=i/N*Math.PI*2+.31;row.push({bx:cx+Math.cos(a)*r,by:cy+Math.sin(a)*r,ox:0,oy:0,x:0,y:0,s:i*.9+k*.4})}
+      P.push(row)}
+    frame(performance.now());
+  }
+  function frame(now){
+    var p=reduce?1:Math.min(1,(now-t0)/2000);p=1-Math.pow(1-p,3);
+    var col=getComputedStyle(document.documentElement).getPropertyValue("--ink").trim()||"#171B45";
+    var red=getComputedStyle(document.documentElement).getPropertyValue("--red").trim()||"#E0262F";
+    var i,k,q,m=Math.ceil(p*K);
+    for(k=0;k<K;k++)for(i=0;i<N;i++){
+      q=P[k][i];
+      var sx=reduce?0:Math.sin(now/1700+q.s)*2.2,sy=reduce?0:Math.cos(now/1900+q.s)*2.2;
+      var bx=q.bx+sx,by=q.by+sy,dx=mx-bx,dy=my-by,dist=Math.hypot(dx,dy),tx=0,ty=0;
+      if(!reduce&&dist<230){var f=Math.pow(1-dist/230,2)*.4;tx=dx*f;ty=dy*f}
+      q.ox+=(tx-q.ox)*.12;q.oy+=(ty-q.oy)*.12;q.x=bx+q.ox;q.y=by+q.oy;
+    }
+    ctx.clearRect(0,0,w,h);ctx.strokeStyle=col;ctx.lineWidth=1.1;
+    ctx.globalAlpha=.3;
+    for(i=0;i<N;i++){ctx.beginPath();ctx.moveTo(cx,cy);
+      for(k=0;k<m;k++){q=P[k][i];
+        var last=k===m-1,part=last?(p*K-k):1;
+        if(last&&part<1){var pr=k?P[k-1][i]:{x:cx,y:cy};ctx.lineTo(pr.x+(q.x-pr.x)*part,pr.y+(q.y-pr.y)*part)}else ctx.lineTo(q.x,q.y)}
+      ctx.stroke()}
+    ctx.globalAlpha=.22;
+    for(k=0;k<m-1;k++){ctx.beginPath();
+      for(i=0;i<=N;i++){var a=P[k][i%N],b=P[k][(i+1)%N];
+        if(i===0)ctx.moveTo(a.x,a.y);
+        var mxp=(a.x+b.x)/2,myp=(a.y+b.y)/2;
+        ctx.quadraticCurveTo(mxp+(cx-mxp)*.1,myp+(cy-myp)*.1,b.x,b.y)}
+      ctx.stroke()}
+    ctx.globalAlpha=1;ctx.fillStyle=red;ctx.beginPath();ctx.arc(cx,cy,6,0,7);ctx.fill();
+    ctx.strokeStyle=red;ctx.globalAlpha=.35;ctx.beginPath();ctx.arc(cx,cy,13,0,7);ctx.stroke();ctx.globalAlpha=1;
+  }
+  function loop(now){if(!vis){raf=0;return}frame(now);raf=requestAnimationFrame(loop)}
+  if(!reduce){
+    hero.addEventListener("pointermove",function(e){var b=hero.getBoundingClientRect();mx=e.clientX-b.left;my=e.clientY-b.top});
+    hero.addEventListener("pointerleave",function(){mx=-1e4;my=-1e4});
+    new IntersectionObserver(function(e){vis=e[0].isIntersecting;if(vis&&!raf)raf=requestAnimationFrame(loop)}).observe(hero);
+  }
+  new ResizeObserver(function(){size()}).observe(hero);
+  size();
+  if(!reduce)raf=requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
